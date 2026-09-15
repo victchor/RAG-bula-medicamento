@@ -46,10 +46,10 @@ def load_settings() -> Settings:
         anthropic_api_key=anthropic_api_key,
         claude_model=os.getenv("CLAUDE_MODEL", "claude-haiku-4-5-20251001"),
         google_api_key=google_api_key,
-        # gemini-3.1-flash-lite tem cota gratuita bem maior que os outros
-        # modelos Gemini e sem overhead de "thinking" — trocar o padrão
-        # para um modelo "melhor" pode reintroduzir limite de cota baixo.
-        gemini_model=os.getenv("GEMINI_MODEL", "gemini-3.1-flash-lite"),
+        # A cota gratuita é POR MODELO — se um esbarrar em limite de uso,
+        # trocar para outro (ex.: outro Flash-Lite) dá uma cota nova, sem
+        # custo. gemini-3.5-flash-lite não tem overhead de "thinking".
+        gemini_model=os.getenv("GEMINI_MODEL", "gemini-3.5-flash-lite"),
         llm_temperature=float(os.getenv("LLM_TEMPERATURE", "0.0")),
         llm_max_tokens=int(os.getenv("LLM_MAX_TOKENS", "1024")),
     )

@@ -7,7 +7,7 @@ from app.config import VECTORSTORE_DIR, load_settings
 from app.ingestion.embeddings import get_embeddings
 from app.ingestion.vectorstore import load_existing_vectorstore
 from app.llm import get_chat_model
-from app.observability.handler import ObservabilityHandler, formatar_metricas
+from app.observability.handler import LiveLogHandler, ObservabilityHandler, formatar_metricas
 from app.rag.chain import get_rag_chain
 from app.rag.reranker import get_reranker
 from app.rag.retriever import get_retriever
@@ -42,9 +42,10 @@ def main() -> None:
 
         observador = ObservabilityHandler()
         inicio = time.perf_counter()
+        print()
         resultado = chain.invoke(
             {"question": pergunta, "chat_history": chat_history},
-            config={"callbacks": [observador]},
+            config={"callbacks": [observador, LiveLogHandler()]},
         )
         duracao = time.perf_counter() - inicio
         resposta = resultado["answer"]
