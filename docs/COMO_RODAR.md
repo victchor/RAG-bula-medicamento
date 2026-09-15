@@ -106,6 +106,10 @@ streamlit run app/ui/streamlit_app.py
 Isso abre automaticamente `http://localhost:8501` no navegador (ou mostra o link no terminal, se
 não abrir sozinho).
 
+**Importante**: use sempre `streamlit run ...`, nunca `python app/ui/streamlit_app.py` direto (nem
+o botão "Run" de algumas IDEs, que faz a mesma coisa por baixo dos panos) — isso causa
+`ModuleNotFoundError: No module named 'app'`.
+
 Aviso inofensivo: o terminal pode mostrar vários `ModuleNotFoundError: No module named 'torchvision'`
 — é um comportamento conhecido do verificador de arquivos do Streamlit ao inspecionar a biblioteca
 `transformers`, sem relação com o funcionamento da aplicação. Pode ignorar.

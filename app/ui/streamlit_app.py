@@ -1,4 +1,13 @@
+import sys
 import time
+from pathlib import Path
+
+# Garante que a raiz do projeto está no sys.path antes dos imports de `app.*`
+# abaixo. Necessário porque, se este arquivo for executado diretamente
+# (`python app/ui/streamlit_app.py`, ou o "Run" de algumas IDEs) em vez de
+# `streamlit run app/ui/streamlit_app.py`, o Python insere a pasta do
+# próprio arquivo no sys.path, não a raiz do projeto.
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent.parent))
 
 import streamlit as st
 from langchain_core.messages import AIMessage, HumanMessage
