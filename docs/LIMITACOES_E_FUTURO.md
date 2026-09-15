@@ -40,6 +40,14 @@ medicamento.
 
 ## Riscos de segurança conhecidos
 
+- **Não há validação de que o documento enviado é realmente uma bula.** A validação de upload
+  (`app/security/file_validation.py`) confere só tamanho, extensão e assinatura de PDF — nunca o
+  conteúdo. Testado na prática: um PDF fictício com uma política de férias de RH foi indexado e
+  respondido normalmente, com a LLM citando página e tudo, sem nenhum aviso de que o conteúdo não
+  era uma bula. O sistema é, na prática, um RAG genérico sobre qualquer PDF — o nome "bula" existe
+  só na interface e no texto do prompt, não em nenhuma verificação de código. Corrigir isso exigiria
+  uma etapa de classificação de conteúdo no upload (heurística por palavras-chave típicas de bula,
+  ou uma chamada de LLM classificadora), não implementada aqui.
 - **Prompt injection é mitigado, não eliminado.** Uma regra no prompt instrui a LLM a ignorar
   instruções escondidas no texto da bula, testada contra algumas técnicas de ofuscação — isso
   reduz o risco, não é uma garantia permanente contra qualquer técnica futura.
@@ -79,6 +87,8 @@ vez de upload manual de PDF), e o cliente faz perguntas em linguagem natural sob
 contraindicações ou interações, sem precisar ler o texto denso da bula impressa.
 
 Para sair do estudo e chegar a algo assim, seria necessário, entre outras coisas:
+- validação de que o conteúdo indexado é de fato uma bula (hoje o sistema aceita qualquer PDF —
+  ver "Riscos de segurança conhecidos" acima), ainda mais crítico num totem público;
 - uma base de bulas oficiais já indexadas (não upload manual), atualizada junto com a ANVISA;
 - integração com um banco de dados de código de barras → medicamento;
 - multi-tenant de verdade (vários totens, várias sessões simultâneas, sem interferência entre si);
