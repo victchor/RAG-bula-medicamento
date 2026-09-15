@@ -1,0 +1,21 @@
+# Ambiente virtual
+.venv/
+venv/
+
+# Segredos
+.env
+
+# Dados do usuário (bulas enviadas e índices vetoriais gerados)
+data/uploads/*
+!data/uploads/.gitkeep
+data/vectorstore/*
+!data/vectorstore/.gitkeep
+
+# Python
+__pycache__/
+*.pyc
+.pytest_cache/
+
+# IDE
+.vscode/
+.idea/

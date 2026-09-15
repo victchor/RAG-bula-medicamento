@@ -1,0 +1,23 @@
+# LLM (Claude e/ou Gemini, conforme LLM_PROVIDER no .env)
+langchain-anthropic==1.6.0
+langchain-google-genai==4.4.0
+python-dotenv==1.0.1
+
+# Leitura de PDF
+langchain-community==0.4.2
+pypdf==6.18.1
+
+# Chunking
+langchain-text-splitters==1.1.2
+
+# Embeddings e reranking (modelos locais)
+langchain-huggingface==1.2.2
+sentence-transformers==6.0.1
+numpy==2.5.3
+
+# Banco vetorial
+langchain-chroma==1.1.0
+chromadb==1.5.9
+
+# Frontend
+streamlit==1.63.0
